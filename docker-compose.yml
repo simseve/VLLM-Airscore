@@ -8,6 +8,7 @@ x-default-volumes: &default_volumes
   volumes:
     - ./:/app
     - node-modules:/app/node_modules
+    - ./airscore/static:/app/airscore/static
 
 services:
   web:
@@ -93,20 +94,20 @@ services:
     networks:
       - net
 
-  nginx:
-    container_name: ${WEB_SERVER_CONTAINER}
-    restart: always
-    build: ./nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - web
-    networks:
-      - net
-    volumes:
-      - type: bind
-        source: ./airscore/static
-        target: /static
+  # nginx:
+  #   container_name: ${WEB_SERVER_CONTAINER}
+  #   restart: always
+  #   build: ./nginx
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - web
+  #   networks:
+  #     - net
+  #   volumes:
+  #     - type: bind
+  #       source: ./airscore/static
+  #       target: /static
 volumes:
   node-modules:
   static-build:
