@@ -252,7 +252,8 @@ def parse_igc_file(lines: list, task: (Task or None) = None) -> tuple:
                     # The time did not change since the previous fix.
                     # Ignore this fix.
                     pass
-                elif task and not (task.window_open_time - 1 <= fix.rawtime <= task.task_deadline + 1):
+                elif task and task.window_open_time is not None and task.task_deadline is not None \
+                    and not (task.window_open_time - 1 <= fix.rawtime <= task.task_deadline + 1):
                     # We are out of task time.
                     # Ignore this fix.
                     pass
